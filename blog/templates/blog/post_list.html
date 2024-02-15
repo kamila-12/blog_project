@@ -1,4 +1,31 @@
-    {% extends 'blog/base.html' %}
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                {% for post in posts %}
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="{% url 'post_detail' pk=post.pk %}">
+                            <h2 class="post-title">{{ post.title }}</h2>
+                        </a>
+                        <p class="post-subtitle">{{ post.text|truncatechars:200 }}</p> <!-- Отображение только первых 200 символов текста -->
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+    
+    
+    {% comment %} {% extends 'blog/base.html' %}
     {% block content %}
     <h3 class="new-posts-link"><a href="{% url 'post_new' %}">Формы</a></h3>
                 {% for post in posts %}
@@ -17,4 +44,4 @@
                 
     {% endblock %}
            
-   
+    {% endcomment %}

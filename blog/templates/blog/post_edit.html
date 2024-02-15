@@ -1,5 +1,23 @@
 
 {% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container mt-5"> <!-- Добавлен класс "container" с верхним отступом "mt-5" -->
+    <div class="row justify-content-center"> <!-- Добавлен класс "row" для центрирования контента -->
+        <div class="col-md-8"> <!-- Добавлен класс "col-md-8" для определения ширины контента -->
+            <h2>New post</h2>
+            <form method="POST" class="post-form">{% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="save btn btn-secondary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% comment %} 
+{% extends 'blog/base.html' %}
 {% block content %}
     <h2>New post</h2>
     <form method="POST" class="post-form">{% csrf_token %}
@@ -7,4 +25,4 @@
         <button type="submit" class="save btn btn-secondary">Save</button>
     </form>
     
-{% endblock %}
+{% endblock %} {% endcomment %}
