@@ -817,6 +817,7 @@ progress {
 
 .offset-8 {
   margin-left: 66.66666667%;
+  
 }
 
 .offset-9 {
@@ -890,7 +891,9 @@ progress {
 .gy-5 {
   --bs-gutter-y: 3rem;
 }
-
+.form-horizontal .form-group {
+  margin-bottom: 0px; /* Пример значений отступа */
+}
 @media (min-width: 576px) {
   .col-sm {
     flex: 1 0 0%;

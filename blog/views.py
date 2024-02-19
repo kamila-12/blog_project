@@ -28,9 +28,10 @@ def post_new(request):
 
 
 def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    # post = get_object_or_404(Post, pk=pk)
+    post = Post.objects.get(pk=pk)
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
