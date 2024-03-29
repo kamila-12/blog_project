@@ -10,15 +10,12 @@
             <form method="post" enctype="multipart/form-data" class="my-form">
                 {% csrf_token %}
                 {{ form|crispy }}
-                
-                {% comment %} {% if form.instance.image %}
-                    <img src="{{ form.instance.image.url }}" alt="Uploaded Image" style="max-width: 100%;">
-                {% endif %} {% endcomment %}
                 <button type="submit" class="btn btn-primary">Submit</button>
+                {% if form.instance.pk %}
+                   
+                    <a href="{% url 'post_delete' pk=form.instance.pk %}" class="btn btn-danger">Delete</a>
+                {% endif %}
                 
-                {% comment %} <a class="btn btn-primary" href="{% url 'task_new' %}" role="button">Create New Task</a> {% endcomment %}
-
-            
             </form>
             
         </div>
