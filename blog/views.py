@@ -5,12 +5,20 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from django.urls import reverse
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+  
+def login_hello(request):
+    return render(request, 'login_hello.html') 
+
+def admin_page(request):
+    return render(request, 'admin_page.html')
   
 class PostListView(ListView):
     
@@ -22,14 +30,19 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Post 
     
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/post_edit.html'
     success_url = '/'
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.published_date = timezone.now()
+        return super().form_valid(form)
 
     
-class PostEditView(UpdateView):
+class PostEditView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/post_edit.html'
@@ -42,7 +55,7 @@ class PostEditView(UpdateView):
     def get_success_url(self):
         return reverse('post_detail', kwargs={'pk': self.object.pk})
     
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post 
     success_url = reverse_lazy('post_list')
 

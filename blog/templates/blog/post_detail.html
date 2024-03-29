@@ -24,7 +24,9 @@
                 {% endif %}
                 <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
                 <p>{{ post.text|linebreaksbr }}</p>
+                {% comment %} <a class="btn btn-danger" href="{% url 'post_delete' pk=task.pk %}" role="button">Удалить</a> {% endcomment %}
                 <h3 class="all-posts-link"><a href="{% url 'post_list' %}">Все записи</a></h3>
+
             </article>
         </div>
     </div>
